@@ -32,15 +32,15 @@ if file is not None:
         for c in chunks:
             score = sum(1 for word in question_words if word in c.lower())
             scored_chunks.append((score, c))
-        scored_chunks.sort(key=lambda x: x[0], reverse=True)  # ✅ fixed sort
+        scored_chunks.sort(key=lambda x: x[0], reverse=True)
         return "\n\n".join(c for _, c in scored_chunks[:3])
 
     def openrouter_llm(prompt_value):
         client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",  # ✅ fixed URL
+            base_url="https://openrouter.ai/api/v1",
             api_key="sk-or-v1- ENTER YOUR API KEY HERE"
         )
-        # ✅ Properly convert LangChain messages to OpenAI format
+        #Properly convert LangChain messages to OpenAI format
         messages = [
             {"role": "system" if msg.type == "system" else "user", "content": msg.content}
             for msg in prompt_value.messages
